@@ -114,10 +114,10 @@ body {
 }
 
 .me-stream {
-  right: 10px;
-  top: 50px;
+  right: 0px;
+  top: 42px;
   height: 250px;
-  width: 300px;
+  width: 310px;
   position: absolute;
   display: flex;
   flex-direction: row;
@@ -619,6 +619,10 @@ body {
   height: 100%;
   z-index: 4;
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: white;
 }
 
@@ -639,4 +643,26 @@ body {
 #color {
   margin-left: 10px;
   margin-right: 20px;
+}
+
+#chatbox {
+  height: 70%;
+  background: #102E46;
+  color: white;
+  width: 310px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  overflow-y: scroll;
+}
+
+@media only screen and (max-width: 780px) {
+  #chatbox {
+    display: none;
+  }
+}
+
+.chats {
+  padding: 30px;
 }

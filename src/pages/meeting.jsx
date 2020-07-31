@@ -337,6 +337,9 @@ const MeetingPage = () => {
 						</StreamPlayer>
 					) : null}
 				</div>
+
+				<div id="chatbox"></div>
+
 				<div className="stream-container">
 					{stateCtx.otherStreams.map((stream, index) => (
 						<StreamPlayer
