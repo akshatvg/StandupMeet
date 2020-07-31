@@ -238,7 +238,7 @@ const MeetingPage = () => {
 				<div className="canvasDiv">
 					<div id="controls">
 						Size:
-        				<select id="thickness" class="fixed">
+        				<select id="thickness" className="fixed">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
