@@ -62,7 +62,7 @@ const MeetingPage = () => {
 			}
 			return client;
 		},
-		[ stateCtx.codec, stateCtx.mode ]
+		[stateCtx.codec, stateCtx.mode]
 	);
 
 	const screenLocalClient = useMemo(
@@ -74,14 +74,14 @@ const MeetingPage = () => {
 			}
 			return screenClient;
 		},
-		[ stateCtx.codec, stateCtx.mode ]
+		[stateCtx.codec, stateCtx.mode]
 	);
 
-	const [ localStream, currentStream ] = useStream(localClient);
-	const [ muteVideo, setMuteVideo ] = useState(stateCtx.muteVideo);
-	const [ muteAudio, setMuteAudio ] = useState(stateCtx.muteAudio);
+	const [localStream, currentStream] = useStream(localClient);
+	const [muteVideo, setMuteVideo] = useState(stateCtx.muteVideo);
+	const [muteAudio, setMuteAudio] = useState(stateCtx.muteAudio);
 
-	const [ isLoaded, setIsLoaded ] = useState(true);
+	const [isLoaded, setIsLoaded] = useState(true);
 
 	const config = useMemo(
 		() => {
@@ -101,7 +101,7 @@ const MeetingPage = () => {
 				// beauty: stateCtx.beauty
 			};
 		},
-		[ stateCtx, muteVideo, muteAudio ]
+		[stateCtx, muteVideo, muteAudio]
 	);
 	const startCallTimer = () => {
 		setTimeout(() => {
@@ -122,7 +122,7 @@ const MeetingPage = () => {
 				localClient && localClient.leave(() => mutationCtx.clearAllStream());
 			};
 		},
-		[ localClient ]
+		[localClient]
 	);
 
 	const history = routerCtx.history;
@@ -136,7 +136,7 @@ const MeetingPage = () => {
 				history.push('/');
 			}
 		},
-		[ config.channel, history, params ]
+		[config.channel, history, params]
 	);
 
 	useEffect(
@@ -158,7 +158,7 @@ const MeetingPage = () => {
 					});
 			}
 		},
-		[ localClient, mutationCtx, config, routerCtx ]
+		[localClient, mutationCtx, config, routerCtx]
 	);
 
 	const handleClick = (name) => {
@@ -218,95 +218,124 @@ const MeetingPage = () => {
 	};
 
 	const handleDoubleClick = (stream) => {
-		if(!stream.getId().includes(localStorage.getItem('uid'))) {
+		if (!stream.getId().includes(localStorage.getItem('uid'))) {
 			mutationCtx.setCurrentStream(stream);
-		} 
+		}
 	};
 
 	const otherStreams = useMemo(
 		() => {
 			return stateCtx.streams.filter((it) => it.getId() !== currentStream.getId());
 		},
-		[ stateCtx.streams, currentStream ]
+		[stateCtx.streams, currentStream]
 	);
 
 	return (
 		<div className="meeting">
 
 			<div className="current-view">
-			<div className="me-stream">
-				<div className="nav">
-					<div className="avatar-container">
-						<div className="default-avatar" />
-						<div className="avatar-text">Standup Meet</div>
+
+				<div className="canvasDiv">
+					<div id="controls">
+						Size:
+        				<select id="thickness" class="fixed">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+						</select>
+						Color:
+       					<select id="color">
+							<option value="#000000">Black</option>
+							<option value="#AAAAAA">Gray</option>
+							<option value="#ff0000">Red</option>
+							<option value="#008000">Green</option>
+							<option value="#0000ff">Blue</option>
+							<option value="#4b0082">Purple</option>
+							<option value="#ee82ee">Pink</option>
+							<option value="#ffffff">White</option>
+						</select>
 					</div>
+					<canvas id="canvas"></canvas>
 				</div>
-				{currentStream ? (
-					<StreamPlayer
-						className={'main-stream-profile'}
-						showProfile={stateCtx.profile}
-						local={
-							config.host ? (
-								currentStream && localStream && currentStream.getId() === localStream.getId()
-							) : (
-								false
-							)
-						}
-						stream={currentStream}
-						onDoubleClick={handleDoubleClick}
-						//onClick={handleDoubleClick}
-						uid={currentStream.getId()}
-						domId={`stream-player-${currentStream.getId()}`}
-					>
-						<div className={classes.menuContainer}>
-							{config.host && (
-								<div className={classes.menu}>
-									<Tooltip title={muteVideo ? 'mute-video' : 'unmute-video'}>
-										<i
-											onClick={handleClick('video')}
-											className={clsx(
-												classes.customBtn,
-												muteVideo ? 'mute-video' : 'unmute-video'
-											)}
-										/>
-									</Tooltip>
-									<Tooltip title={muteAudio ? 'mute-audio' : 'unmute-audio'}>
-										<i
-											onClick={handleClick('audio')}
-											className={clsx(
-												classes.customBtn,
-												muteAudio ? 'mute-audio' : 'unmute-audio'
-											)}
-										/>
-									</Tooltip>
-									<Tooltip title={stateCtx.screen ? 'stop-screen-share' : 'start-screen-share'}>
-										<i
-											onClick={handleClick('screen')}
-											className={clsx(
-												classes.customBtn,
-												stateCtx.screen ? 'start-screen-share' : 'stop-screen-share'
-											)}
-										/>
-									</Tooltip>
-									<Tooltip title="quit">
-										<div
-											className={clsx(classes.customBtn, 'quit')}
-											onClick={() => {
-												localClient.leave().then(() => {
-													localStorage.clear();
-													mutationCtx.clearAllStream();
-													// mutationCtx.resetState()
-													routerCtx.history.push('/');
-												});
-											}}
-										/>
-									</Tooltip>
-									{/* <i onClick={handleClick('profile')} className={clsx(classes.customBtn, 'show-profile')}/> */}
-								</div>
-							)}
+
+				<div className="me-stream">
+
+					<div className="nav">
+						<div className="avatar-container">
+							<div className="default-avatar" />
+							<div className="avatar-text">Standup Meet</div>
 						</div>
-					</StreamPlayer>
-				) : null}
+					</div>
+					{currentStream ? (
+						<StreamPlayer
+							className={'main-stream-profile'}
+							showProfile={stateCtx.profile}
+							local={
+								config.host ? (
+									currentStream && localStream && currentStream.getId() === localStream.getId()
+								) : (
+										false
+									)
+							}
+							stream={currentStream}
+							onDoubleClick={handleDoubleClick}
+							//onClick={handleDoubleClick}
+							uid={currentStream.getId()}
+							domId={`stream-player-${currentStream.getId()}`}
+						>
+							<div className={classes.menuContainer}>
+								{config.host && (
+									<div className={classes.menu}>
+										<Tooltip title={muteVideo ? 'mute-video' : 'unmute-video'}>
+											<i
+												onClick={handleClick('video')}
+												className={clsx(
+													classes.customBtn,
+													muteVideo ? 'mute-video' : 'unmute-video'
+												)}
+											/>
+										</Tooltip>
+										<Tooltip title={muteAudio ? 'mute-audio' : 'unmute-audio'}>
+											<i
+												onClick={handleClick('audio')}
+												className={clsx(
+													classes.customBtn,
+													muteAudio ? 'mute-audio' : 'unmute-audio'
+												)}
+											/>
+										</Tooltip>
+										<Tooltip title={stateCtx.screen ? 'stop-screen-share' : 'start-screen-share'}>
+											<i
+												onClick={handleClick('screen')}
+												className={clsx(
+													classes.customBtn,
+													stateCtx.screen ? 'start-screen-share' : 'stop-screen-share'
+												)}
+											/>
+										</Tooltip>
+										<Tooltip title="quit">
+											<div
+												className={clsx(classes.customBtn, 'quit')}
+												onClick={() => {
+													localClient.leave().then(() => {
+														localStorage.clear();
+														mutationCtx.clearAllStream();
+														// mutationCtx.resetState()
+														routerCtx.history.push('/');
+													});
+												}}
+											/>
+										</Tooltip>
+										{/* <i onClick={handleClick('profile')} className={clsx(classes.customBtn, 'show-profile')}/> */}
+									</div>
+								)}
+							</div>
+						</StreamPlayer>
+					) : null}
 				</div>
 				<div className="stream-container">
 					{stateCtx.otherStreams.map((stream, index) => (

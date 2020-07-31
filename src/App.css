@@ -92,6 +92,7 @@ body {
   width: 100%;
   height: 100%;
   flex: 1;
+  z-index: 2;
 }
 
 .current-view {
@@ -103,6 +104,7 @@ body {
   background-color: #666;
   background-size: 280px;
   background-image: url('./assets/background_img.png');
+  z-index: -2;
 }
 
 .stream-player {
@@ -110,26 +112,38 @@ body {
   flex: 1;
 }
 
-.me-stream{
+.me-stream {
   right: 10px;
-  top: 10px;
+  top: 50px;
   height: 250px;
   width: 300px;
   position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  z-index: 2000000;
+}
+
+@media only screen and (max-width: 780px) {
+  .stream-container {
+    display: none;
+  }
+
+  .stream-container>.stream-player {
+    display: none;
+  }
 }
 
 .stream-container {
   left: 10px;
-  top: 10px;
+  top: 50px;
   height: auto;
   width: auto;
   position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  z-index: 2000000;
 }
 
 .stream-container>.stream-player {
@@ -140,6 +154,7 @@ body {
   position: relative;
   border-radius: 2px;
   overflow: hidden;
+  z-index: 2000000;
   display: inline-block;
 }
 
@@ -167,7 +182,7 @@ body {
   margin: 3px;
   margin-left: 0;
   border-radius: 28px;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
 }
 
 .autoplay {
@@ -210,8 +225,8 @@ body {
   cursor: pointer;
   background-repeat: no-repeat;
   background-position: center;
-  
-  
+
+
 }
 
 .quit:hover {
@@ -552,32 +567,72 @@ body {
   flex-direction: column;
   position: absolute;
 }
-.host-div{
+
+.host-div {
   display: none;
 }
-@media screen and (max-width:767px){
+
+@media screen and (max-width:767px) {
   .MuiContainer-root {
     min-width: 100% !important;
     box-sizing: border-box !important;
   }
+
   .MuiPaper-root {
     min-width: 100% !important;
     max-height: 100vh !important;
     min-height: 100vh !important;
     overflow-y: auto !important;
   }
-  .MuiPaper-root > div {
+
+  .MuiPaper-root>div {
     display: block;
   }
-  .MuiPaper-root > div > div, .MuiPaper-root > div > div + div {
+
+  .MuiPaper-root>div>div,
+  .MuiPaper-root>div>div+div {
     padding: 15px;
     box-sizing: border-box;
   }
+
   .nav {
     bottom: 70px;
     justify-content: center;
   }
+
   .stream-container {
     width: 100%;
+    display: none;
   }
+}
+
+#canvas {
+  width: 100%;
+  z-index: 2;
+  background: white;
+  height: 100%;
+}
+
+.canvasDiv {
+  width: 100%;
+  height: 100%;
+}
+
+#controls {
+  background-color: #102E46;
+  position: absolute;
+  color: white;
+  font-family: Helvetica, Verdana, sans-serif;
+  font-weight: bold;
+  font-size: smaller;
+  padding: 10px;
+  width: 100%;
+  height: 22px;
+  text-align: center;
+}
+
+#thickness,
+#color {
+  margin-left: 10px;
+  margin-right: 20px;
 }
