@@ -234,6 +234,7 @@ const MeetingPage = () => {
 		<div className="meeting">
 
 			<div className="current-view">
+			<div className="me-stream">
 				<div className="nav">
 					<div className="avatar-container">
 						<div className="default-avatar" />
@@ -306,6 +307,7 @@ const MeetingPage = () => {
 						</div>
 					</StreamPlayer>
 				) : null}
+				</div>
 				<div className="stream-container">
 					{stateCtx.otherStreams.map((stream, index) => (
 						<StreamPlayer
