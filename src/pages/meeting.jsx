@@ -9,6 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import StreamPlayer from './meeting/stream-player';
 import CircularLoading from '../utils/loading';
 import ScriptTag from 'react-script-tag';
+import Snackbar from '@material-ui/core/Snackbar';
 
 const useStyles = makeStyles({
 	menu: {
@@ -260,10 +261,11 @@ const MeetingPage = () => {
 							<option value="#ffffff">White</option>
 						</select>
 					</div>
-					<canvas id="canvas"></canvas>
+					<canvas id="canvas" data-role='page'></canvas>
+					<ReloadOnce />
 					<ScriptsOrbiter />
-					<ScriptsTranscription />
 					<ScriptsUnionDraw />
+					<ScriptsTranscription />
 				</div>
 
 				<div className="me-stream">
@@ -367,15 +369,19 @@ const MeetingPage = () => {
 };
 
 function ScriptsOrbiter() {
-	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn-agora.akshatvg.com/orbiterMicro.js" />
+	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn.jsdelivr.net/gh/akshatvg/Agora-RTC-CDN/orbiterMicro.js" />
 	);
 }
 function ScriptsTranscription() {
-	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn-agora.akshatvg.com/Agora-Transcription.js" />
+	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn.jsdelivr.net/gh/akshatvg/Agora-RTC-CDN/Agora-Transcription.js" />
 	);
 }
 function ScriptsUnionDraw() {
-	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn-agora.akshatvg.com/UnionDraw.js" />
+	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn.jsdelivr.net/gh/akshatvg/Agora-RTC-CDN/UnionDraw.js" />
+	);
+}
+function ReloadOnce() {
+	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn-agora.akshatvg.com/reloadOnce.js" />
 	);
 }
 
