@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { Component, useEffect, useState, useMemo } from 'react';
 import clsx from 'clsx';
 import { useGlobalState, useGlobalMutation } from '../utils/container';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,6 +8,7 @@ import RTCClient from '../rtc-client';
 import Tooltip from '@material-ui/core/Tooltip';
 import StreamPlayer from './meeting/stream-player';
 import CircularLoading from '../utils/loading';
+import ScriptTag from 'react-script-tag';
 
 const useStyles = makeStyles({
 	menu: {
@@ -260,6 +261,9 @@ const MeetingPage = () => {
 						</select>
 					</div>
 					<canvas id="canvas"></canvas>
+					<ScriptsOrbiter />
+					<ScriptsTranscription />
+					<ScriptsUnionDraw />
 				</div>
 
 				<div className="me-stream">
@@ -361,5 +365,18 @@ const MeetingPage = () => {
 		</div>
 	);
 };
+
+function ScriptsOrbiter() {
+	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn-agora.akshatvg.com/orbiterMicro.js" />
+	);
+}
+function ScriptsTranscription() {
+	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn-agora.akshatvg.com/Agora-Transcription.js" />
+	);
+}
+function ScriptsUnionDraw() {
+	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn-agora.akshatvg.com/UnionDraw.js" />
+	);
+}
 
 export default React.memo(MeetingPage);
