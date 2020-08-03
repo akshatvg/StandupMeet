@@ -262,7 +262,7 @@ const MeetingPage = () => {
 						</select>
 					</div>
 					<canvas id="canvas" data-role='page'></canvas>
-					<ReloadOnce />
+					{/* <ReloadOnce /> */}
 					<ScriptsOrbiter />
 					<ScriptsUnionDraw />
 					<ScriptsTranscription />
