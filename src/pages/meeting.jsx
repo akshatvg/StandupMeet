@@ -262,7 +262,6 @@ const MeetingPage = () => {
 						</select>
 					</div>
 					<canvas id="canvas" data-role='page'></canvas>
-					{/* <ReloadOnce /> */}
 					<ScriptsOrbiter />
 					<ScriptsUnionDraw />
 					<ScriptsTranscription />
@@ -378,10 +377,6 @@ function ScriptsTranscription() {
 }
 function ScriptsUnionDraw() {
 	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn.jsdelivr.net/gh/akshatvg/Agora-RTC-CDN/UnionDraw.js" />
-	);
-}
-function ReloadOnce() {
-	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn-agora.akshatvg.com/reloadOnce.js" />
 	);
 }
 
