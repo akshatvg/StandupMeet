@@ -372,7 +372,7 @@ function ScriptsOrbiter() {
 	);
 }
 function ScriptsTranscription() {
-	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn.jsdelivr.net/gh/akshatvg/Agora-RTC-CDN/Agora-Transcription.js" />
+	return (<ScriptTag isHydrating={true} type="text/javascript" src="https://cdn-agora.akshatvg.com/Agora-Transcription.js" />
 	);
 }
 function ScriptsUnionDraw() {
