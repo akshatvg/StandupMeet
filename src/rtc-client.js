@@ -146,7 +146,7 @@ export default class RTCClient {
          }
          const screenSharingStream = AgoraRTC.createStream({
            streamID: this._uid+Math.floor(1000 + Math.random() * 9000),
-           audio: true,
+           audio: false,
            video: false,
            screen: true,
            microphoneId: data.microphoneId,
