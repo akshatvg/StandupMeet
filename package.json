@@ -25,7 +25,8 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^5.0.1",
     "react-script-tag": "^1.1.2",
-    "react-scripts": "3.1.1"
+    "react-scripts": "4.0.0",
+    "snyk": "^1.424.4"
   },
   "scripts": {
     "dev": "react-scripts start",
@@ -33,7 +34,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "eslint:fix": "eslint --config .eslintrc --fix --cache --format=pretty --ignore-path .eslintignore ./src/**/*.{js,jsx} ./src/*.{js,jsx}",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "browserslist": {
     "production": [
@@ -68,5 +71,6 @@
     "husky": "^4.2.3",
     "lint-staged": "^10.1.1",
     "prettier": "^2.0.2"
-  }
+  },
+  "snyk": true
 }
