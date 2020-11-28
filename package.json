@@ -26,7 +26,7 @@
     "react-router-dom": "^5.0.1",
     "react-script-tag": "^1.1.2",
     "react-scripts": "4.0.0",
-    "snyk": "^1.424.4"
+    "snyk": "^1.425.4"
   },
   "scripts": {
     "dev": "react-scripts start",
